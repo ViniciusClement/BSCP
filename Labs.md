@@ -8,12 +8,12 @@
 2) Settings > Grep - Match `Invalid username or password.`
 3) Snipper attack on username
 
-<img width="1080" height="500" alt="" src="../BSCP/IMG/1.png" />
+<img width="1080" height="500" src="../BSCP/IMG/1.png" />
 
 4) Try to find password
 5) Settings > Auto-pause attack > pause if expression in the list is missing from a response `Invalid username or password`
 
-<img width="1080" height="500" alt="" src="../BSCP/IMG/2.png" />
+<img width="1080" height="500" src="../BSCP/IMG/2.png" />
 
 
 ### Lab: Username enumeration via response timing
