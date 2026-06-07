@@ -120,7 +120,9 @@ Authorization: Basic base64(username:password)
 HTTP basic authentication is also particularly vulnerable to session-related exploits, notably CSRF, against which it offers no protection on its own.
 
 
-- [Lab: Username enumeration via different responses](#Usernamenumeration)
+
+
+_____________
 
 ### Path Transversal
 
