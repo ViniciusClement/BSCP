@@ -86,3 +86,39 @@ After that, copy de session cookie and change on application to login.
 <img width="auto" height="500" src="IMG/7.png" />
 
 <img width="auto" height="500" src="IMG/8.png" />
+
+
+### Lab: 2FA simple bypass
+
+<p>
+This lab's two-factor authentication can be bypassed. You have already obtained a valid username and password, but do not have access to the user's 2FA verification code. To solve the lab, access Carlos's account page.
+
+```
+Your credentials: wiener:peter
+Victim's credentials carlos:montoya
+```
+</p>
+
+1) Authenticate with wiener account
+2) Understand the pages and routes "\my-account" 
+
+<img width="auto" height="500" src="IMG/9.png" />
+
+3) Now, we can autenticate on application with carlos and bypass the 2 MFA because we know that exists "my-account" route.
+
+<img width="auto" height="500" src="IMG/10.png" />
+
+<img width="auto" height="500" src="IMG/11.png" />
+
+### Lab: 2FA broken logic
+
+This lab's two-factor authentication is vulnerable due to its flawed logic. To solve the lab, access Carlos's account page.
+
+```
+Your credentials: wiener:peter
+Victim's username: carlos
+```
+
+You also have access to the email server to receive your 2FA verification code
+
+
