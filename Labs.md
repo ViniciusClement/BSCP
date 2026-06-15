@@ -122,3 +122,26 @@ Victim's username: carlos
 You also have access to the email server to receive your 2FA verification code
 
 
+### Lab: 2FA bypass using a brute-force attack
+
+This lab's two-factor authentication is vulnerable to brute-forcing. You have already obtained a valid username and password, but do not have access to the user's 2FA verification code. To solve the lab, brute-force the 2FA code and access Carlos's account page.
+
+Victim's credentials: carlos:montoya
+
+```
+Note
+As the verification code will reset while you're running your attack, you may need to repeat this attack several times before you succeed. This is because the new code may be a number that your current Intruder attack has already attempted.
+```
+
+
+### Lab: Brute-forcing a stay-logged-in cookie
+
+This lab allows users to stay logged in even after they close their browser session. The cookie used to provide this functionality is vulnerable to brute-forcing.
+
+To solve the lab, brute-force Carlos's cookie to gain access to his My account page.
+
+```
+Your credentials: wiener:peter
+Victim's username: carlos
+Candidate passwords
+```
