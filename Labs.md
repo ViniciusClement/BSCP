@@ -167,3 +167,9 @@ GET /product?productId="example"
 
 This lab contains a debug page that discloses sensitive information about the application. To solve the lab, obtain and submit the SECRET_KEY environment variable.
 
+1) Go to the "Target" > "Site Map" tab. Right-click on the top-level entry for the lab and select "Engagement tools" > "Find comments". 
+
+2) Notice that the home page contains an HTML comment that contains a link called "Debug". This points to /cgi-bin/phpinfo.php
+
+<img width="auto" height="auto" src="IMG/13.png" />
+<img width="auto" height="auto" src="IMG/14.png" />
