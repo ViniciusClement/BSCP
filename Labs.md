@@ -173,3 +173,21 @@ This lab contains a debug page that discloses sensitive information about the ap
 
 <img width="auto" height="auto" src="IMG/13.png" />
 <img width="auto" height="auto" src="IMG/14.png" />
+
+
+### Lab: Source code disclosure via backup files
+
+This lab leaks its source code via backup files in a hidden directory. To solve the lab, identify and submit the database password, which is hard-coded in the leaked source code.
+
+1) Search for robots.txt page
+2) Found the backup page
+3) Access the content on backup page
+
+```
+https://0a5600cb046b5e40863b1c7e00dc0093.web-security-academy.net/robots.txt
+https://0a5600cb046b5e40863b1c7e00dc0093.web-security-academy.net/backup
+https://0a5600cb046b5e40863b1c7e00dc0093.web-security-academy.net/backup/ProductTemplate.java.bak
+```
+
+<img width="auto" height="auto" src="IMG/15.png" />
+<img width="auto" height="auto" src="IMG/16.png" />

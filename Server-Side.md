@@ -394,6 +394,51 @@ Debugging information may sometimes be logged in a separate file. If an attacker
 Lab: Information disclosure on debug page
 ```
 
+**User account pages**
+
+By their very nature, a user's profile or account page usually contains sensitive information, such as the user's email address, phone number, API key, and so on. As users normally only have access to their own account page, this does not represent a vulnerability in itself. However, some websites contain logic flaws that potentially allow an attacker to leverage these pages in order to view other users' data.
+
+For example, consider a website that determines which user's account page to load based on a user parameter.
+
+```
+GET /user/personal-info?user=carlos
+```
+
+Most websites will take steps to prevent an attacker from simply changing this parameter to access arbitrary users' account pages. However, sometimes the logic for loading individual items of data is not as robust.
+
+An attacker may not be able to load another users' account page entirely, but the logic for fetching and rendering the user's registered email address, for example, might not check that the user parameter matches the user that is currently logged in. In this case, simply changing the user parameter would allow an attacker to display arbitrary users' email addresses on their own account page.
+
+We'll look at these kind of vulnerabilities in more detail when we cover access control and IDOR vulnerabilities.
+
+
+**Source code disclosure via backup files**
+
+Obtaining source code access makes it much easier for an attacker to understand the application's behavior and construct high-severity attacks. Sensitive data is sometimes even hard-coded within the source code. Typical examples of this include API keys and credentials for accessing back-end components.
+
+If you can identify that a particular open-source technology is being used, this provides easy access to a limited amount of source code.
+
+Occasionally, it is even possible to cause the website to expose its own source code. When mapping out a website, you might find that some source code files are referenced explicitly. Unfortunately, requesting them does not usually reveal the code itself. When a server handles files with a particular extension, such as .php, it will typically execute the code, rather than simply sending it to the client as text. However, in some situations, you can trick a website into returning the contents of the file instead. For example, text editors often generate temporary backup files while the original file is being edited. These temporary files are usually indicated in some way, such as by appending a tilde (~) to the filename or adding a different file extension. Requesting a code file using a backup file extension can sometimes allow you to read the contents of the file in the response.
+
+Once an attacker has access to the source code, this can be a huge step towards being able to identify and exploit additional vulnerabilities that would otherwise be almost impossible. One such example is insecure deserialization. We'll look at this vulnerability later in a dedicated topic.
+
+```
+Lab: Source code disclosure via backup files
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ________________
 ## 7. Access Control
