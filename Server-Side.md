@@ -1,10 +1,9 @@
 # Server-Side
+## 1. SQL Injection
+## 2. Authentication
 
-## SQL Injection
+### 2.0 - Description 
 
-## Authentication
-
-<p>
 Authentication vulnerabilities can allow attackers to gain access to sensitive data and functionality.
 it's important to learn how to identify and exploit authentication vulnerabilities, and how to bypass common protection measures.
 
@@ -15,12 +14,10 @@ Something you know, such as a password or the answer to a security question. The
 Something you have, This is a physical object such as a mobile phone or security token. These are sometimes called "possession factors".
 
 Something you are or do. For example, your biometrics or patterns of behavior. These are sometimes called "inherence factors".
-</p>
 
-<p>
+
 Authentication is the process of verifying that a user is who they claim to be. 
 Authorization involves verifying whether a user is allowed to do something.
-
 
 How do authentication vulnerabilities arise?
 Most vulnerabilities in authentication mechanisms occur in one of two ways:
@@ -32,9 +29,9 @@ Several of the labs require you to enumerate usernames and brute-force passwords
 
 * https://portswigger.net/web-security/authentication/auth-lab-usernames
 * https://portswigger.net/web-security/authentication/auth-lab-passwords
-</p>
 
-### Vulnerabilities in password-based login
+
+### 2.1 - Vulnerabilities in password-based login
 
 <p>
 For websites that adopt a password-based login process, users either register for an account themselves or they are assigned an account by an administrator. This account is associated with a unique username and a secret password, which the user enters in a login form to authenticate themselves.
@@ -44,15 +41,15 @@ In this scenario, the fact that they know the secret password is taken as suffic
 This can be achieved in a number of ways. The following sections show how an attacker can use brute-force attacks, and some of the flaws in brute-force protection. You'll also learn about the vulnerabilities in HTTP basic authentication.
 </p>
 
-### Brute-force attacks
+### 2.2 - Brute-force attacks
 
 A brute-force attack is when an attacker uses a system of trial and error to guess valid user credentials. These attacks are typically automated using wordlists of usernames and passwords
 
-### Brute-forcing usernames
+### 2.3 - Brute-forcing usernames
 
 Usernames are especially easy to guess if they conform to a recognizable pattern, such as an email address. For example, it is very common to see business logins in the format firstname.lastname@somecompany.com. However, even if there is no obvious pattern, sometimes even high-privileged accounts are created using predictable usernames, such as admin or administrator.
 
-### Brute-forcing passwords
+### 2.4 - Brute-forcing passwords
 
 Passwords can similarly be brute-forced, with the difficulty varying based on the strength of the password. Many websites adopt some form of password policy, which forces users to create high-entropy passwords that are, theoretically at least, harder to crack using brute-force alone. This typically involves enforcing passwords with:
 
@@ -67,7 +64,7 @@ In cases where the policy requires users to change their passwords on a regular 
 
 This knowledge of likely credentials and predictable patterns means that brute-force attacks can often be much more sophisticated, and therefore effective, than simply iterating through every possible combination of characters.
 
-### Username enumeration
+### 2.5 - Username enumeration
 
 Username enumeration is when an attacker is able to `observe changes` in the website's behavior in order to identify whether a given username is valid.
 
@@ -79,7 +76,7 @@ While attempting to brute-force a login page, you should pay particular attentio
 2) Error messages: Sometimes the returned error message is different depending on whether both the username AND password are incorrect or only the password was incorrect.
 3) Response times:  If most of the requests were handled with a similar response time, any that deviate from this suggest that something different was happening behind the scenes. This is another indication that the guessed username might be correct. For example, a website might only check whether the password is correct if the username is valid. This extra step might cause a slight increase in the response time.
 
-### Flawed brute-force protection
+### 2.6 - Flawed brute-force protection
 
 The two most common ways of preventing brute-force attacks are:
 
@@ -87,7 +84,7 @@ The two most common ways of preventing brute-force attacks are:
 2. Blocking the remote user's IP address if they make too many login attempts in quick succession
 
 
-### Account locking
+### 2.7 - Account locking
 
 One way in which websites try to prevent brute-forcing is to lock the account if certain suspicious criteria are met, usually a set number of failed login attempts.
 
@@ -99,7 +96,7 @@ One way in which websites try to prevent brute-forcing is to lock the account if
 
 Account locking does not protect against credential stuffing because each username is only being attempted once. Credential stuffing is particularly dangerous because it can sometimes result in the attacker compromising many different accounts with just a single automated attack.
 
-### User rate limiting
+### 2.8 - User rate limiting
 
 Another way websites try to prevent brute-force attacks is through user rate limiting. In this case, making too many login requests within a short period of time causes your IP address to be blocked. Typically, the IP can only be unblocked in one of the following ways:
 
@@ -109,7 +106,7 @@ Another way websites try to prevent brute-force attacks is through user rate lim
 
 there are several ways an attacker can manipulate their apparent IP in order to bypass the block.
 
-### HTTP basic authentication
+### 2.9 - HTTP basic authentication
 
 In HTTP basic authentication, the client receives an authentication token from the server, which is constructed by concatenating the username and password, and encoding it in Base64. This token is stored and managed by the browser, which automatically adds it to the Authorization header of every subsequent request as follows:
 
@@ -120,7 +117,7 @@ Authorization: Basic base64(username:password)
 HTTP basic authentication is also particularly vulnerable to session-related exploits, notably CSRF, against which it offers no protection on its own.
 
 
-### Vulnerabilities in multi-factor authentication
+### 2.10 - Vulnerabilities in multi-factor authentication
 
 <p>
 In this section, we'll look at some of the vulnerabilities that can occur in multi-factor authentication mechanisms.
@@ -201,8 +198,7 @@ This is ineffective in practice because an advanced attacker can even automate t
 * https://portswigger.net/bappstore/9abaa233088242e8be252cd4ff534988
 _____________
 
-
-### Vulnerabilities in other authentication mechanisms
+### 2.11 - Vulnerabilities in other authentication mechanisms
 
 In addition to the basic login functionality, most websites provide supplementary functionality to allow users to manage their account. 
 For example, users can typically change their password or reset their password when they forget it. These mechanisms can also introduce vulnerabilities that can be exploited by an attacker.
@@ -223,14 +219,11 @@ While this may be true if done correctly, naively "encrypting" the cookie using 
 Even using proper encryption with a one-way hash function is not completely bulletproof. If the attacker is able to easily identify the hashing algorithm, and no salt is used, they can potentially brute-force the cookie by simply hashing their wordlists. This method can be used to bypass login attempt limits if a similar limit isn't applied to cookie guesses.
 
 
+## 3. Path Transversal
+## 4. Command Injection
+## 5. Business Logic Vulnerabilities
 
-### Path Transversal
-
-### Command Injection
-
-### Business Logic Vulnerabilities
-
-### Information Disclosure
+## 6. Information Disclosure
 
 Information disclosure, also known as information leakage, is when a website unintentionally reveals sensitive information to its users. Depending on the context, websites may leak all kinds of information to a potential attacker, including:
 
@@ -252,31 +245,94 @@ Some basic examples of information disclosure are as follows:
 
 Information disclosure vulnerabilities can arise in countless different ways, but these can broadly be categorized as follows:
 
-) Failure to remove internal content from public content. For example, developer comments in markup are sometimes visible to users in the production environment.
+1) Failure to remove internal content from public content. For example, developer comments in markup are sometimes visible to users in the production environment.
 
-* Insecure configuration of the website and related technologies. For example, failing to disable debugging and diagnostic features can sometimes provide attackers with useful tools to help them obtain sensitive information. Default configurations can also leave websites vulnerable, for example, by displaying overly verbose error messages.
+2) Insecure configuration of the website and related technologies. For example, failing to disable debugging and diagnostic features can sometimes provide attackers with useful tools to help them obtain sensitive information. Default configurations can also leave websites vulnerable, for example, by displaying overly verbose error messages.
 
-* Flawed design and behavior of the application. For example, if a website returns distinct responses when different error states occur, this can also allow attackers to enumerate sensitive data, such as valid user credentials.
+3) Flawed design and behavior of the application. For example, if a website returns distinct responses when different error states occur, this can also allow attackers to enumerate sensitive data, such as valid user credentials.
 
-### Access Control
+**What is the impact of information disclosure vulnerabilities?**
 
-### File Upload Vulnerabilities
+Information disclosure vulnerabilities can have both a direct and indirect impact depending on the purpose of the website and, therefore, what information an attacker is able to obtain. In some cases, the act of disclosing sensitive information alone can have a high impact on the affected parties. For example, an online shop leaking its customers' credit card details is likely to have severe consequences.
 
-### Race Conditions
+On the other hand, leaking technical information, such as the directory structure or which third-party frameworks are being used, may have little to no direct impact. However, in the wrong hands, this could be the key information required to construct any number of other exploits. The severity in this case depends on what the attacker is able to do with this information.
 
-### Server Side Request Forgery (SSRF)
+**How to prevent information disclosure vulnerabilities**
 
-### XXE Injection
+* Make sure that everyone involved in producing the website is fully aware of what information is considered sensitive. Sometimes seemingly harmless information can be much more useful to an attacker than people realize. Highlighting these dangers can help make sure that sensitive information is handled more securely in general by your organization.
 
-### NoSQL Injection
+* Audit any code for potential information disclosure as part of your QA or build processes. It should be relatively easy to automate some of the associated tasks, such as stripping developer comments.
 
-### API Testing
+* Use generic error messages as much as possible. Don't provide attackers with clues about application behavior unnecessarily.
 
-### Web Cache Deception
+* Double-check that any debugging or diagnostic features are disabled in the production environment.
 
-
-### LABS
-
-### Lab: Username enumeration via different responses
+* Make sure you fully understand the configuration settings, and security implications, of any third-party technology that you implement. Take the time to investigate and disable any features and settings that you don't actually need.
 
 
+**How to find and exploit information disclosure vulnerabilities**
+
+You will often find sensitive data while testing for something else. A key skill is being able to recognize interesting information whenever and wherever you do come across it.
+
+The following are some examples of high-level techniques and tools that you can use to help identify information disclosure vulnerabilities during testing.
+
+* Fuzzing
+* Using Burp Scanner
+* Using Burp's engagement tools
+* Engineering informative responses
+
+### 6.1 - Fuzzing
+
+If you identify interesting parameters, you can try submitting unexpected data types and specially crafted fuzz strings to see what effect this has. Pay close attention; although responses sometimes explicitly disclose interesting information, they can also hint at the application's behavior more subtly.
+
+For example, this could be a slight difference in the time taken to process the request. Even if the content of an error message doesn't disclose anything, sometimes the fact that one error case was encountered instead of another one is useful information in itself.
+
+You can automate much of this process using tools such as Burp Intruder. This provides several benefits. Most notably, you can:
+
+* Add payload positions to parameters and use pre-built wordlists of fuzz strings to test a high volume of different inputs in quick succession.
+
+* Easily identify differences in responses by comparing HTTP status codes, response times, lengths, and so on.
+
+* Use grep matching rules to quickly identify occurrences of keywords, such as error, invalid, SELECT, SQL, and so on.
+
+* Apply grep extraction rules to extract and compare the content of interesting items within responses.
+
+You can also use the [Logger++](https://portswigger.net/bappstore/470b7057b86f41c396a97903377f3d81) extension, available from the BApp store. In addition to logging requests and responses from all of Burp's tools, it allows you to define advanced filters for highlighting interesting entries. This is just one of the many Burp extensions that can help you find any sensitive data that is leaked by the website.
+
+
+### 6.2 - Burp Scanner
+
+Burp Suite Professional users have the benefit of Burp Scanner. This provides live scanning features for auditing items while you browse, or you can schedule automated scans to crawl and audit the target site on your behalf. Both approaches will automatically flag many information disclosure vulnerabilities for you. For example, Burp Scanner will alert you if it finds sensitive information such as private keys, email addresses, and credit card numbers in a response. It will also identify any backup files, directory listings, and so on.
+
+### 6.3 - Burp's Engagement Tools
+
+Burp provides several engagement tools that you can use to find interesting information in the target website more easily. You can access the engagement tools from the context menu - just right-click on any HTTP message, Burp Proxy entry, or item in the site map and go to "Engagement tools".
+
+The following tools are particularly useful in this context.
+
+**Search**
+You can use this tool to look for any expression within the selected item. You can fine-tune the results using various advanced search options, such as regex search or negative search. This is useful for quickly finding occurrences (or absences) of specific keywords of interest.
+
+**Find comments**
+You can use this tool to quickly extract any developer comments found in the selected item. It also provides tabs to instantly access the HTTP request/response cycle in which each comment was found.
+
+**Discover content**
+You can use this tool to identify additional content and functionality that is not linked from the website's visible content. This can be useful for finding additional directories and files that won't necessarily appear in the site map automatically.
+
+
+### 6.4 - Engineering informative responses
+
+Verbose error messages can sometimes disclose interesting information while you go about your normal testing workflow. However, by studying the way error messages change according to your input, you can take this one step further. In some cases, you will be able to manipulate the website in order to extract arbitrary data via an error message.
+
+There are numerous methods for doing this depending on the particular scenario you encounter. One common example is to make the application logic attempt an invalid action on a specific item of data. For example, submitting an invalid parameter value might lead to a stack trace or debug response that contains interesting details. You can sometimes cause error messages to disclose the value of your desired data in the response.
+
+
+________________
+## 7. Access Control
+## 8. File Upload Vulnerabilities
+## 9. Race Conditions
+## 10. Server Side Request Forgery (SSRF)
+## 11. XXE Injection
+## 12. NoSQL Injection
+## 13. API Testing
+## 14. Web Cache Deception
