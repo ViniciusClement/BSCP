@@ -327,6 +327,74 @@ Verbose error messages can sometimes disclose interesting information while you 
 There are numerous methods for doing this depending on the particular scenario you encounter. One common example is to make the application logic attempt an invalid action on a specific item of data. For example, submitting an invalid parameter value might lead to a stack trace or debug response that contains interesting details. You can sometimes cause error messages to disclose the value of your desired data in the response.
 
 
+### 6.5 - Common sources of information disclosure
+
+Information disclosure can occur in a wide variety of contexts within a website. The following are some common examples of places where you can look to see if sensitive information is exposed.
+
+* Files for web crawlers
+* Directory listings
+* Developer comments
+* Error messages LABS
+* Debugging data LABS
+* User account pages LABS
+* Backup files LABS
+* Insecure configuration LABS
+* Version control history LABS
+
+
+**Files for web crawlers**
+
+Many websites provide files at `/robots.txt` and  `/sitemap.xml` to help crawlers navigate their site. Among other things, these files often list specific directories that the crawlers should skip, for example, because they may contain sensitive information.
+
+As these files are not usually linked from within the website, they may not immediately appear in Burp's site map. However, it is worth trying to navigate to `/robots.txt` or `/sitemap.xml` manually to see if you find anything of use.
+
+**Directory listings**
+
+Web servers can be configured to automatically list the contents of directories that do not have an index page present. This can aid an attacker by enabling them to quickly identify the resources at a given path, and proceed directly to analyzing and attacking those resources. It particularly increases the exposure of sensitive files within the directory that are not intended to be accessible to users, such as temporary files and crash dumps.
+
+Directory listings themselves are not necessarily a security vulnerability. However, if the website also fails to implement proper access control, leaking the existence and location of sensitive resources in this way is clearly an issue.
+
+**Developer comments**
+
+During development, in-line HTML comments are sometimes added to the markup. These comments are typically stripped before changes are deployed to the production environment. However, comments can sometimes be forgotten, missed, or even left in deliberately because someone wasn't fully aware of the security implications. Although these comments are not visible on the rendered page, they can easily be accessed using Burp, or even the browser's built-in developer tools.
+
+Occasionally, these comments contain information that is useful to an attacker. For example, they might hint at the existence of hidden directories or provide clues about the application logic.
+
+
+**Error messages**
+
+One of the most common causes of information disclosure is verbose error messages. As a general rule, you should pay close attention to all error messages you encounter during auditing.
+
+The content of error messages can reveal information about what input or data type is expected from a given parameter. This can help you to narrow down your attack by identifying exploitable parameters. It may even just prevent you from wasting time trying to inject payloads that simply won't work.
+
+Verbose error messages can also provide information about different technologies being used by the website. For example, they might explicitly name a template engine, database type, or server that the website is using, along with its version number. This information can be useful because you can easily search for any documented exploits that may exist for this version. Similarly, you can check whether there are any common configuration errors or dangerous default settings that you may be able to exploit. Some of these may be highlighted in the official documentation.
+
+You might also discover that the website is using some kind of open-source framework. In this case, you can study the publicly available source code, which is an invaluable resource for constructing your own exploits.
+
+Differences between error messages can also reveal different application behavior that is occurring behind the scenes. Observing differences in error messages is a crucial aspect of many techniques, such as SQL injection, username enumeration, and so on.
+
+```
+Lab: Information disclosure in error messages
+```
+
+**Debugging data**
+
+For debugging purposes, many websites generate custom error messages and logs that contain large amounts of information about the application's behavior. While this information is useful during development, it is also extremely useful to an attacker if it is leaked in the production environment.
+
+Debug messages can sometimes contain vital information for developing an attack, including:
+
+* Values for key session variables that can be manipulated via user input
+* Hostnames and credentials for back-end components
+* File and directory names on the server
+* Keys used to encrypt data transmitted via the client
+
+Debugging information may sometimes be logged in a separate file. If an attacker is able to gain access to this file, it can serve as a useful reference for understanding the application's runtime state. It can also provide several clues as to how they can supply crafted input to manipulate the application state and control the information received.
+
+```
+Lab: Information disclosure on debug page
+```
+
+
 ________________
 ## 7. Access Control
 ## 8. File Upload Vulnerabilities

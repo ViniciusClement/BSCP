@@ -145,3 +145,25 @@ Your credentials: wiener:peter
 Victim's username: carlos
 Candidate passwords
 ```
+
+### Lab: Information disclosure in error messages
+
+This lab's verbose error messages reveal that it is using a vulnerable version of a third-party framework. To solve the lab, obtain and submit the version number of this framework.
+
+**Original Request**
+```
+GET /product?productId=10
+```
+
+**Modified Request**
+```
+GET /product?productId="example"
+```
+
+<img width="auto" height="auto" src="IMG/12.png" />
+
+
+### Lab: Information disclosure on debug page
+
+This lab contains a debug page that discloses sensitive information about the application. To solve the lab, obtain and submit the SECRET_KEY environment variable.
+
